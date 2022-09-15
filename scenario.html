@@ -1,0 +1,115 @@
+<html>
+<head>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<style>
+#machin {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	background: red;
+}
+#truc {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: rgb(28, 121, 28);
+}
+
+#omkItem {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding: 4px;
+	background: rgba(173, 190, 173, 0.39);
+}
+
+body {
+	overflow: hidden;
+	font-family: monospace;
+}
+
+</style>
+
+<div id="machin"></div>
+<div id="truc"></div>
+<img id="monImage"></img>
+<div id="omkItem"></div>
+<script type="module">
+
+import { Timeliner } from './asset/js/timeliner/timeliner.js'
+
+var actions = {};
+
+// initialize timeliner
+var timeliner = new Timeliner(actions);
+d3.json('timeliner/timeliner-noeudgordien.json').then(function(json){
+	timeliner.load(json);
+});
+
+
+function animate() {
+	requestAnimationFrame(animate);
+
+	let objects = timeliner.getObjetActions();
+	for (const o in objects ){
+		let oa = objects[o];
+		if(oa.e){
+			for (const a in oa.actions){
+				let p = oa.actions[a];
+				if(p.styles.nb){
+					let slct = d3.select(oa.e);
+					for (const s in p.styles){
+						slct.style(s,p.styles[s]);
+					}
+				}else{
+					switch (a) {
+						case 'maFonction':
+							montreOmkItem(o, p);					
+							break;			
+						default:
+							let nv = p.text ? p.text : p.val;
+							//on ne change que si la valeur est différente
+							//pour éviter les chargements multiples
+							if(oa.e.getAttribute(p.prop)!=nv)oa.e.setAttribute(p.prop,nv);
+							break;
+					}
+				}
+				//console.log(oa);
+			}
+		}
+	}
+
+}
+
+
+
+animate();
+
+let omkItems = [];
+let omkProps = ['genstory:hasActant','genstory:hasAffect','genstory:hasEvenement','genstory:hasLieu','genstory:hasObjet']
+function montreOmkItem(id, params) {
+	if(!omkItems[params.text]){
+		omkItems[params.text]={'item':null,'div':null};
+		d3.json(params.text).then(function(item){
+			omkItems[params.text].item = item;
+			omkItems[params.text].div = d3.select('#'+id);
+			omkItems[params.text].div.append('h1').html(item['o:title']);
+			let props = omkItems[params.text].div.data(omkProps).join('div');
+			props.selectAll('.property').data(d=>{
+					let dt = Array.from(d3.group(item[d], p => p['property_label']))
+					return dt;
+				}).join('div').attr('class','property').html(s=>{
+					return s[0]+' : '
+				}).selectAll('.value')
+				.data(d=>d[1]).join('span').attr('class','value').html(s=>{
+					return s['@value']+' - ';
+				});
+		})
+	}
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+{
+	"version": "1.2.0",
+	"modified": "Mon Dec 08 2014 10:41:11 GMT+0800 (SGT)",
+	"title": "Noeud Gordien",
+	"layers": [
+		{
+			"id": "be939adb-2f5a-466b-8c30-703229735e63",
+			"name": "voir image",
+			"values": [
+				{
+					"time": 0.5,
+					"value": 0.5,
+					"_color": "#df7bfb",
+					"idObj": "monImage",
+					"prop": "src",
+					"text": "https://jardindesconnaissances.univ-paris8.fr/genstory/files/large/9574838f0fce2b2f8c2be54c2753919c5b160e8c.jpg",
+					"tween": "linear"
+				},
+				{
+					"time": 1.3,
+					"value": 0.7,
+					"_color": "#96d53b",
+					"tween": "linear",
+					"idObj": "monImage",
+					"prop": "src",
+					"text": "https://jardindesconnaissances.univ-paris8.fr/genstory/files/large/08bd86194a1e5199e5f4d427ad3cc14108db662e.jpg"
+				},
+				{
+					"time": 2,
+					"value": 2,
+					"_color": "#d5904a"
+				}
+			],
+			"_value": 0.5,
+			"_color": "#249c46"
+		},
+		{
+			"id": "12f1768c-87db-40df-b8f9-994225b37f6b",
+			"name": "bouge",
+			"values": [
+				{
+					"time": 0.7,
+					"value": 0.8,
+					"_color": "#573e22",
+					"tween": "quadEaseIn",
+					"idObj": "truc,machin",
+					"prop": "translateX"
+				},
+				{
+					"time": 1.8,
+					"value": 400,
+					"_color": "#64647b"
+				}
+			],
+			"_value": 0.8,
+			"_color": "#280d07"
+		},
+		{
+			"id": "53595ac4-b276-4ff1-a779-63c058c37099",
+			"name": "bouger encore",
+			"values": [
+				{
+					"time": 0.2,
+					"value": 0,
+					"_color": "#1e26f8",
+					"idObj": "truc",
+					"prop": "translateY",
+					"tween": "linear"
+				},
+				{
+					"time": 1.6,
+					"value": 500,
+					"_color": "#69d52e"
+				}
+			],
+			"_value": 0,
+			"_color": "#3bf4d1"
+		},
+		{
+			"id": "24e52a3b-70b2-4cd2-ad8e-f31a4d832f81",
+			"name": "allonge",
+			"values": [
+				{
+					"time": 0,
+					"value": 0,
+					"_color": "#863bbd",
+					"prop": "height",
+					"tween": "linear",
+					"idObj": "truc"
+				},
+				{
+					"time": 2.2,
+					"value": 200,
+					"_color": "#dc55f3"
+				}
+			],
+			"_value": 0,
+			"_color": "#3cf52a"
+		},
+		{
+			"id": "f563d8e4-018a-401d-8e2b-366191f20cfe",
+			"name": "pulse",
+			"values": [
+				{
+					"time": 0.7,
+					"value": 0.7,
+					"_color": "#965f3c",
+					"tween": "quadEaseInOut",
+					"idObj": "machin",
+					"prop": "scale"
+				},
+				{
+					"time": 1,
+					"value": 5,
+					"_color": "#fbe1d",
+					"tween": "quadEaseIn",
+					"idObj": "machin",
+					"prop": "scale"
+				},
+				{
+					"time": 1.4,
+					"value": 0,
+					"_color": "#c702c3",
+					"tween": "quadEaseIn",
+					"idObj": "machin",
+					"prop": "scale"
+				},
+				{
+					"time": 1.8,
+					"value": 1.8,
+					"_color": "#b5966a"
+				}
+			],
+			"_value": 0.7,
+			"_color": "#67deb3"
+		},
+		{
+			"id": "cdea16dd-7a65-4da2-9b11-5560680c3b57",
+			"name": "maFonction",
+			"values": [
+				{
+					"time": 1.2,
+					"value": 1.2,
+					"_color": "#c9cdcb",
+					"tween": "linear",
+					"prop": "url",
+					"text": "https://jardindesconnaissances.univ-paris8.fr/genstory/s/atelier-rit/item/29.json-ld",
+					"idObj": "omkItem"
+				},
+				{
+					"time": 2,
+					"value": 2,
+					"_color": "#c13ebe"
+				}
+			],
+			"_value": 1.2,
+			"_color": "#b59028"
+		}
+	],
+	"ui": {
+		"currentTime": 0,
+		"totalTime": 3,
+		"scrollTime": 0,
+		"timeScale": 60
+	},
+	"name": "Noeud Gordien"
+}
