@@ -70,8 +70,8 @@ function animate() {
 							break;			
 						default:
 							let nv = p.text ? p.text : p.val;
-							//on ne change que si la valeur est diffÃ©rente
-							//pour Ã©viter les chargements multiples
+							//on ne change que si la valeur est diff�rente
+							//pour �viter les chargements multiples
 							if(oa.e.getAttribute(p.prop)!=nv)oa.e.setAttribute(p.prop,nv);
 							break;
 					}
@@ -107,7 +107,9 @@ function montreOmkItem(id, params) {
 					return s['@value']+' - ';
 				});
 		})
-		d3.select(".slide")
+
+
+                   d3.select(".slide")
  		  .append("a")
   		  .attr("href", "#")
   		  .html("Slide 1");
@@ -118,7 +120,7 @@ function montreOmkItem(id, params) {
 		d3.select(".slide")
  		  .append("a")
   		  .attr("href", "#")
-  		  .html("Slide 3");  
+  		  .html("Slide 3"); 
 	}
 }
 
