@@ -102,7 +102,9 @@
                     .then(data => {
                         confs = data;
                     });
-
+                    window.onload = (event) => { 
+                    showDiapo(confs[Math.floor(Math.random()*confs.length)].urlSlide+'?diapo=0');//Affiche un diapo aléatoire à la page 1
+                };
 
                 d3.select('#btnNewAlea').on('click',newAlea);
 
