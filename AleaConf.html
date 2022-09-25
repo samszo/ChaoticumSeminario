@@ -103,11 +103,25 @@
                         confs = data;
                     });
 
+                let historyArray = [] ;
 
                 d3.select('#btnNewAlea').on('click',newAlea);
                 setTimeout(newAlea, 500)
                 function newAlea(){
-                    let svg = d3.select("#svgLoad"), diapo, url, conf = confs[Math.floor(Math.random()*confs.length)];
+
+                    let temp = Math.floor(Math.random()*confs.length);
+                    
+                    if (historyArray.length == confs.length){
+                        historyArray = [];
+                    }
+
+                    while(historyArray.includes(temp)){
+                        temp = Math.floor(Math.random()*confs.length);
+                    }
+
+                    historyArray.push(temp);
+
+                    let svg = d3.select("#svgLoad"), diapo, url, conf = confs[temp];
                     /*vérifie si la conf est chargée
                     if(!conf.svg){
                         d3.xml(conf.urlSVG)
