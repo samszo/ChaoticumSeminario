@@ -105,7 +105,7 @@
 
 
                 d3.select('#btnNewAlea').on('click',newAlea);
-
+                setTimeout(newAlea,1000);
                 function newAlea(){
                     let svg = d3.select("#svgLoad"), diapo, url, conf = confs[Math.floor(Math.random()*confs.length)];
                     /*vérifie si la conf est chargée
