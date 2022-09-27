@@ -3,4 +3,4 @@
 
 
 
-https://adrabalde.github.io/ChaoticumSeminario/AleaConf.html
+https://adrabalde.github.io/ChaoticumSeminario/scenario.html
