@@ -17,4 +17,4 @@ Les tokens non fongibles ont permis de résoudre des problèmes de l’ authenti
 Lorsqu'il s'agit de NFT, la valeur n'est pas nécessairement liée à l'illustration jointe. Parfois, le plus important est de prouver la propriété de cet actif particulier. C'est cet aspect qui fait de la cryptomonnaie l'un des cas d'utilisation NFT les plus populaires.
 
 ## Objets de collection NFT :
-Avec l'art numérique NFT, ces tokens non fongibles représentent une part importante des ventes sur les marchés NFT comme Opensea, **BakerySwap**, et Treasureland. Il y a beaucoup d'utilisations croisées avec l'art crypto, et parfois un NFT peut être à la fois un objet de collection et une oeuvre d'art. Ces deux cas d'utilisation sont les plus développés actuellement.
+Avec l'art numérique NFT, ces tokens non fongibles représentent une part importante des ventes sur les marchés NFT comme Opensea, ***BakerySwap***, et Treasureland. Il y a beaucoup d'utilisations croisées avec l'art crypto, et parfois un NFT peut être à la fois un objet de collection et une oeuvre d'art. Ces deux cas d'utilisation sont les plus développés actuellement.
