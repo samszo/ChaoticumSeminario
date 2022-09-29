@@ -35,7 +35,7 @@ body {
 <div id="machin"></div>
 <div id="truc"></div>
 <img id="monImage"></img>
-<div id="omkItem"></div>
+<div id="omkItem" class="slide"></div>
 <script type="module">
 
 import { Timeliner } from './asset/js/timeliner/timeliner.js'
@@ -70,8 +70,8 @@ function animate() {
 							break;			
 						default:
 							let nv = p.text ? p.text : p.val;
-							//on ne change que si la valeur est diffÃ©rente
-							//pour Ã©viter les chargements multiples
+							//on ne change que si la valeur est différente
+							//pour éviter les chargements multiples
 							if(oa.e.getAttribute(p.prop)!=nv)oa.e.setAttribute(p.prop,nv);
 							break;
 					}
@@ -107,6 +107,20 @@ function montreOmkItem(id, params) {
 					return s['@value']+' - ';
 				});
 		})
+
+
+                   d3.select(".slide")
+ 		  .append("a")
+  		  .attr("href", "#")
+  		  .html("<br/><br/>Slide 1");
+		d3.select(".slide")
+ 		  .append("a")
+  		  .attr("href", "#")
+  		  .html("<br/><br/>Slide 2");
+		d3.select(".slide")
+ 		  .append("a")
+  		  .attr("href", "#")
+  		  .html("<br/><br/>Slide 3"); 
 	}
 }
 
