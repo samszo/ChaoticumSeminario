@@ -1,1 +1,1 @@
-https://github.com/sorayahd/ChaoticumSeminario/blob/main/AleaConf.html
+https://sorayahd.github.io/ChaoticumSeminario/AleaConf.html
