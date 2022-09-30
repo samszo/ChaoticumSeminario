@@ -76,7 +76,9 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <button id="btnNewAlea" type="button" class="btn btn-danger">
+                                        <button id="btnNewAlea" type="button" class="btn btn-danger" 
+                                        onclick="bip()">
+                                            
                                             <i class="fa-solid fa-shuffle fa-2xl"></i>
                                         </button>
                                     </li>
@@ -87,6 +89,13 @@
                     </nav>
                 </div>
             </header>
+            <script>
+                function bip(){
+                    var bip= new Audio();
+                    bip.src="https://www.soundjay.com/buttons/sounds/beep-02.mp3";
+                    bip.play();
+                }
+            </script>
             <script>
                 let mlPetit = new amazelogo({
                     'idCont': 'logoMazePetit',
