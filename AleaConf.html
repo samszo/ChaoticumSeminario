@@ -17,6 +17,7 @@
     <script src="asset/js/anime.min.js"></script>
     <script src="asset/js/all.min.js"></script>
     <script src="asset/js/amazelogo.js"></script>
+    
     <style>
         #logoMazePetit {
             height: 60px;
@@ -30,6 +31,19 @@
         #aleaDiapo{
             height: 650px;
             width: 100%;            
+        }
+        #aleaDiapo:fullscreen
+        {
+            background-color: white;
+            align-items: center;
+            position: fixed;
+        }
+        #btnFullScreen
+        {
+            display: block;
+            float: left;
+            margin-left: 1900%;
+            margin-top: 20 %;
         }
         html, body {margin: 0; height: 100%; overflow: hidden}
 
@@ -78,6 +92,12 @@
                                     <li class="nav-item">
                                         <button id="btnNewAlea" type="button" class="btn btn-danger">
                                             <i class="fa-solid fa-shuffle fa-2xl"></i>
+                                        </button>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <button id="btnFullScreen" type="button" class="btn btn-danger">
+                                            <i class="fa-solid fa-expand"></i>
                                         </button>
                                     </li>
 
@@ -137,7 +157,6 @@
                     console.log(url);
                     d3.select('#aleaDiapo').attr('src',url);
                 }
-
             </script>
 
             <main id='mainContent' class="px-3">
@@ -171,5 +190,5 @@
 
 
     </body>
-
+    <script src="asset/js/main.js"></script>
 </html>
