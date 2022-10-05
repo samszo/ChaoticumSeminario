@@ -117,16 +117,14 @@
                 setTimeout(newAlea, 500)
 
                 function history(){  
-                    console.log('arr',leftHistoryArray);
-                    console.log('devant',historyArray);
                     if ((historyArray.length-2) == leftHistoryArray.length){ 
                         console.log('coucou2')
                         document.querySelector('#btnHistory').disabled = true;
                     }
                     leftHistoryArray.push(historyArray[historyArray.length-1-leftHistoryArray.length]);
                     
-                    let svg = d3.select("#svgLoad"), diapo, url, conf = confs[historyArray[historyArray.length-leftHistoryArray.length-1]];
-                    showDiapo(conf.urlSlide+'?diapo='+Math.floor(Math.random()*conf.diapos.length));
+                    let svg = d3.select("#svgLoad"), diapo, url, conf = historyArray[historyArray.length-leftHistoryArray.length-1];
+                    showDiapo(conf.urlSlide);
                     
                 }
                 function newAlea(){
@@ -136,7 +134,7 @@
                     }
                     let temp;
                     if(leftHistoryArray[0]){
-                        temp = leftHistoryArray[leftHistoryArray.length-1];
+                        curlconf = leftHistoryArray[leftHistoryArray.length-1];
                         leftHistoryArray.pop();
                     }
                     else{
@@ -144,12 +142,14 @@
                         if (historyArray.length == confs.length){
                             historyArray = [];
                         }
-                        while(historyArray.includes(temp)){
+                        while(historyArray.includes(confs[temp])){
                             temp = Math.floor(Math.random()*confs.length);
                         }
-                        historyArray.push(temp);
+                        curlconf = confs[temp];
+                        curlconf.urlSlide = curlconf.urlSlide+'?diapo='+Math.floor(Math.random()*curlconf.diapos.length);
+                        historyArray.push(curlconf);
                     }
-                    let svg = d3.select("#svgLoad"), diapo, url, conf = confs[temp];
+                    let svg = d3.select("#svgLoad"), diapo, url, conf = curlconf;
                     /*vérifie si la conf est chargée
                     if(!conf.svg){
                         d3.xml(conf.urlSVG)
@@ -172,7 +172,7 @@
                         showDiapo(conf.urlSlide+'?diapo='+Math.floor(Math.random()*conf.diapos.length));
                     }
                     */
-                    showDiapo(conf.urlSlide+'?diapo='+Math.floor(Math.random()*conf.diapos.length));
+                    showDiapo(conf.urlSlide);
 
                 }
                 function showDiapo(url){
