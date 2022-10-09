@@ -76,7 +76,9 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <button id="btnNewAlea" type="button" class="btn btn-danger">
+                                        <button id="btnNewAlea" type="button" class="btn btn-danger" 
+                                        onclick="slide()">
+                                            
                                             <i class="fa-solid fa-shuffle fa-2xl"></i>
                                         </button>
                                     </li>
@@ -87,6 +89,13 @@
                     </nav>
                 </div>
             </header>
+            <script>
+                function slide(){
+                    var song = new Audio();
+                    song.src="media/song2.mp3";
+                    song.play();
+                }
+            </script>
             <script>
                 let mlPetit = new amazelogo({
                     'idCont': 'logoMazePetit',
