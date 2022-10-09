@@ -32,4 +32,6 @@ de jeux (personnages, armes, équipements) accompagnés d’un certificat d’un
 Ces actifs deviennent des valeurs que les joueurs peuvent les vendre ou les acheter. Ils peuvent prendre ou perdre de la valeur en fonction
 de la rareté ou de la demande des joueurs.
 
+#Source d'information
 
+https://gamingcampus.fr/tomorrow-lab/gaming-industry/nft-et-jeux-video-simple-effet-de-mode-ou-transformation-profonde-du-media.html
