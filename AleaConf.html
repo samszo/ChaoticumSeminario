@@ -32,6 +32,28 @@
             width: 100%;            
         }
         html, body {margin: 0; height: 100%; overflow: hidden}
+        .btnGoChrono {
+            text-decoration: none;
+            padding: 10px;
+            font-family: verdana;
+            font-size: 1em;
+            color: #000000;
+            background-color: #c6d9f0;
+            border-radius: 24px;
+            border: 4px solid #548dd4;
+
+        }
+        .chronoContainer{
+            padding: 40px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .displayChrono{
+            font-size: 32px;
+            font-family: 'georgia';
+            font-weight: bold;
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -152,8 +174,21 @@
                 </div>
             </div>
                 <div id="svgLoad"></div>
-            </main>            
-
+            </main>
+            <!-- Début Bloc HTML Chronometre -->
+            <div>
+                <div class="chronoContainer">
+                    <button id="btnGoChrono" class="btnGoChrono">Démarrer la présentation</button>
+                </div>
+                <div class="chronoContainer">
+                    <span id = "chrono" class ="displayChrono" >00:00:00 </span>
+                </div>
+                <div class="chronoContainer">
+                    <button id="btnStopChrono" class="btnGoChrono">Arrêter la présentation</button>
+                </div>
+                <script src="asset/js/timer.js"></script>
+            </div>
+            <!-- Fin bloc HTML Chronometre -->
             <footer class="mt-auto text-white-50">
                 <p style="padding-top: 6px;">Design by <a href="https://samszo.univ-paris8.fr/"
                         class="text-white">Samuel
