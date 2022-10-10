@@ -103,6 +103,11 @@
                         confs = data;
                     });
 
+                // Quand la page est chargée
+                window.onload = (event) => {
+                    // On affiche la première diapo
+                    showDiapo(confs[Math.floor(Math.random()*confs.length)].urlSlide+'?diapo=0');
+                };
 
                 d3.select('#btnNewAlea').on('click',newAlea);
 
