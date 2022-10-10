@@ -1,3 +1,3 @@
 # ChaoticumSeminario
 
-https://github.com/Ilham2001/ChaoticumSeminario/blob/main/AleaConf.html
+https://Ilham2001.github.io/ChaoticumSeminario/AleaConf.html
