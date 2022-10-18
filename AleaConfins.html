@@ -260,7 +260,7 @@
                         d3.select("#aleaDiapo").style('display','none');
                         showChoix(data[0]["dcterms:title"][0]["@value"], '');
                         let html=data[0]["@type"]=="o:Media" ? 
-                            "<img src='"+data[0].thumbnail_display_urls.large+"' class='img-fluid' />"
+                            "<img src='"+data[0]["o:thumbnail_urls"].large+"' class='img-fluid' />"
                             :
                             data[0]["dcterms:description"][0]["@value"];
                         d3.select("#aleaCita").style('display','block').html(html);                
