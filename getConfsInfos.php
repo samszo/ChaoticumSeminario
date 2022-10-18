@@ -2,8 +2,8 @@
 //récupère la liste des conférences
 $directory = '/var/www/html/samszo/conf_errance/';//getcwd();
 $webPath = "https://samszo.univ-paris8.fr/conf_errance/";
-$directory = '/Users/samszo/Sites/samszo/conf_errance/';
-$webPath = "http://localhost/samszo/conf_errance/";
+//$directory = '/Users/samszo/Sites/samszo/conf_errance/';
+//$webPath = "http://localhost/samszo/conf_errance/";
 $scanned_directory = array_diff(scandir($directory), array('..', '.'));
 $confs = array();
 foreach ($scanned_directory as $c) {
