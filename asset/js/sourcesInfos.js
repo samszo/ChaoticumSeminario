@@ -5,11 +5,11 @@
 }, {
     "id": "btnCita",
     "label": "Si t'as scion",
-    "url": "http://localhost/samszo/omk/api/items?resource_class_id=73&sort_by=random&limit=1&offset=1&per_page=1"
+    "url": "https://samszo.univ-paris8.fr/omk/api/items?resource_class_id=73&sort_by=random&limit=1&offset=1&per_page=1"
 }, {
     "id": "btnDia",
     "label": "Doctogramme",
-    "url": "http://localhost/samszo/omk/api/media?sort_by=random&limit=1&offset=1&per_page=1"
+    "url": "https://samszo.univ-paris8.fr/omk/api/media?sort_by=random&limit=1&offset=1&per_page=1&media_type=image/png"
 }, {
     "id": "btnLoc",
     "label": "In terre locuteur",
