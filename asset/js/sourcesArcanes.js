@@ -1,8 +1,7 @@
-[
-{
-    "id":"btnConf",
-    "label":"Conf. errance",
-    "fnct":"aleaDia"
+[{
+    "id": "btnConf",
+    "label": "Conf. errance",
+    "fnct": "aleaDia"
 }, {
     "id": "btnCita",
     "label": "Si t'as scion",
@@ -14,12 +13,30 @@
 }, {
     "id": "btnLoc",
     "label": "In terre locuteur",
-    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRv3Z99vpH6N8OFZ_VA1ft8YrBMD5cIYTL5ME0ZmxXmMCKcx0coreLZdha1QvX4i2PrYkWeX0PfXc0h/pub?gid=316802798&single=true&output=csv",
-    "fnct":"setLoc"
+    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR78NBpzHGiDEY4_ctyustAuMYS84QqXZp9H0o8ZQG-4yusRIU38ni2C2vybGN5p0IYvjR_WQAuxOBM/pub?gid=283903441&single=true&output=csv",
+    "fnct": "setLoc"
 }, {
-    "id": "btnSemi",
-    "label": "Seminaire",
-    "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRv3Z99vpH6N8OFZ_VA1ft8YrBMD5cIYTL5ME0ZmxXmMCKcx0coreLZdha1QvX4i2PrYkWeX0PfXc0h/pub?gid=316802798&single=true&output=csv",
+    "id": "btnArcanesRapports",
+    "label": "Arcanes - Rapports",
+    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94",
+    "fnct": "setActant"
+}, {
+    "id": "btnArcanesBiblio",
+    "label": "Arcanes - Biblio",
+    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94",
+    "fnct": "setActant"
+}, {
+    "id": "btnMoliere",
+    "label": "Molière",
+    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94"
+}, {
+    "id": "btnGorafi",
+    "label": "Gorafi",
+    "url": "https://polemika.univ-paris8.fr/omk/api/items?item_set_id=2&sort_by=random&limit=1&offset=1&per_page=1"
+}, {
+    "id": "btnMesostiche",
+    "label": "Mesostiche",
+    "url": "https://samszo.github.io/mesostiche/image.html?w=300&h=300&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red"
 }
 
 ]

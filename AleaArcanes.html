@@ -37,6 +37,9 @@
             height: 600px;
             width: 100%;            
         }
+        #listeSources{
+            width: max-content;
+        }
 
         #aleaCita{
             display: none;
@@ -98,32 +101,8 @@
                                             <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                               Sources
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-dark">
-                                                <li><h6 class="dropdown-header">Sam Szo</h6></li>
-                                                <li>
-                                                    <input type="checkbox" class="btn-check" id="btnConf" autocomplete="off">
-                                                    <label for="btnConf" class="m-2 btn btn-outline-danger btn-sm">Conf. errance</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" class="btn-check" id="btnCita" autocomplete="off">
-                                                    <label for="btnCita" class="m-2 btn btn-outline-danger btn-sm">Si t'as scion</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" class="btn-check" id="btnCita" autocomplete="off">
-                                                    <label for="btnCita" class="m-2 btn btn-outline-danger btn-sm">In terre locuteur</label>
-                                                </li>
-                                                <li><h6 class="dropdown-header">Arcanes</h6></li>
-                                                <li>
-                                                    <input type="checkbox" class="btn-check" id="btnSemi" autocomplete="off">
-                                                    <label for="btnSemi" class="m-2 btn btn-outline-danger btn-sm">Séminaires</label>
-                                                </li>
-                                              </ul>
-                                            <!--
-                                            <form class="dropdown-menu dropdown-menu-dark p-2">
-                                            <div id="listeSources" class="btn-group-vertical btn-group-lg " role="group" aria-label="Basic checkbox toggle button group">
-                                            </div>
-                                            </form>
-                                            -->
+                                            <ul id="listeSources" class="dropdown-menu dropdown-menu-dark">
+                                            </ul>
                                         </div>
                                     </li>
                                     <li class="nav-item ms-2 me-1">
@@ -163,16 +142,16 @@
                 d3.json("asset/js/sourcesArcanes.js")
                     .then(data => {
                         sources = data;
-                        let liste = d3.select('#listeSources').selectAll('div').data(sources).enter().append('div');
-                        liste.append(d=>d.class ? "h6" : 'input')
-                            .attr('type', d.class ? "" : "checkbox")
-                            .attr('class',d.class ? d.class : "btn-check")
+                        let liste = d3.select('#listeSources').selectAll('li').data(sources).enter().append('li');
+                        liste.append('input')
+                            .attr('type', "checkbox")
+                            .attr('class',"btn-check")
                             .attr('id',d=>d.id)
                             .attr('autocomplete',"off")
                             .on('click',setSource);
                         liste.append('label')
                             .attr('for',d=>d.id)
-                            .attr('class',"btn btn-outline-danger")
+                            .attr('class',"m-2 btn btn-outline-danger btn-sm")
                             .html(d=>d.label);
 
 
@@ -329,7 +308,7 @@
 
             <footer class="mt-auto text-white-50">
                 <h3>
-                    Générateur de conférence chaotique formant la frontière où commence un territoire immédiatement voisin.
+                    Générateur de conférences fabriquées à l'aide de secrets chaotiques.
                 </h3>
                 <p style="padding-top: 6px;">Design by <a href="https://samszo.univ-paris8.fr/"
                         class="text-white">Samuel
