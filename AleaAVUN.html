@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aléa AVUN</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+    </script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="asset/js/anime.min.js"></script>
+    <script src="asset/js/all.min.js"></script>
+    <script src="asset/js/amazelogo.js"></script>
+    <script src="asset/js/easytimer.min.js"></script>
+    <style>
+        #logoMazePetit {
+            height: 60px;
+            width: 200px;
+        }
+        #svgLoad{
+            height: 0px;
+            width: 0px;
+            visibility: hidden;
+        }
+        #aleaDiapo{
+            height: 650px;
+            width: 100%;            
+        }
+        #listeEvents{
+            overflow: scroll;
+            height: 600px;
+            width: 100%;            
+        }
+
+        #aleaCita{
+            display: none;
+            background-color: black;
+            color: white;
+            font-size: 2em;
+            overflow: scroll;
+            height: 650px;
+            vertical-align: middle;
+            padding: 2px;
+        }
+
+        html, body {margin: 0; height: 100%; overflow: hidden}
+
+    </style>
+</head>
+
+<body>
+
+    <body class="d-flex h-100 text-center text-white bg-dark">
+
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+
+            <header>
+                <div>
+
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="#">
+                                <div id="logoMazePetit"></div>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-2 align-middle">
+
+                                    <li class="nav-item mx-2">
+                                        <a class="nav-link" target="_blank"
+                                            href="https://www.univ-paris8.fr/EA-349-Laboratoire-Paragraphe">
+                                            <img style="height: 40px;"
+                                                src="asset/images/logos/logo-paragraphe-blanc.svg"
+                                                alt="Laboratoire Paragraphe" />
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item mx-2">
+                                        <a class="nav-link" target="_blank" href="https://www.univ-paris8.fr/">
+                                            <img style="height: 40px;" src="asset/images/logos/logo-p8-white.svg"
+                                                alt="Université Paris 8" />
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item ms-2 me-1">
+                                        <p class="fs-2">Sources :</p>
+                                    </li>
+
+                                    <li class="nav-item mx-2">
+                                        <div id="listeSources" class="btn-group btn-group-lg" role="group" aria-label="Basic checkbox toggle button group">
+                                        </div>
+                                    </li>
+                                    <li class="nav-item ms-2 me-1">
+                                        <p class="fs-2">Durée :</p>
+                                    </li>
+                                    <li class="nav-item ms-1 me-2">
+                                        <input style="padding: 9px;" type="time" id="confDuree" value="00:00" step="1">
+                                    </li>
+
+                                    <li class="nav-item mx-2">
+                                        <button id="btnNewAlea" type="button" class="btn btn-danger">
+                                            <i class="fa-solid fa-shuffle fa-2xl"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <script>
+                let mlPetit = new amazelogo({
+                    'idCont': 'logoMazePetit',
+                    'colorLettre': '#e52414',
+                    'colorMurLettre': '#e52414'
+                        //,'colorMur':'alea'
+                        ,
+                    'colorPoint': 'none',
+                    'textes': ['ALEA', 'AVUN']
+                }),
+                timer, timerDia,
+                time = d3.select('#confDuree').node(),                
+                duree, minTimeDia = 60, maxTimeDia = 60, numEvent,
+                confs, sources, srcSelect = new Map(), aleaSource, locuteurs;
+;
+                //ajoute les sources
+                d3.json("asset/js/sourcesAVUN.js")
+                    .then(data => {
+                        sources = data;
+                        let liste = d3.select('#listeSources').selectAll('div').data(sources).enter().append('div');
+                        liste.append('input')
+                            .attr('type',"checkbox")
+                            .attr('class',"btn-check")
+                            .attr('id',d=>d.id)
+                            .attr('autocomplete',"off")
+                            .on('click',setSource);
+                        liste.append('label')
+                            .attr('for',d=>d.id)
+                            .attr('class',"btn btn-outline-danger")
+                            .html(d=>d.label);
+                    });                
+                d3.json("asset/js/confsInfos.js")
+                    .then(data => {
+                        confs = data;
+                    });                
+                d3.select('#btnNewAlea').on('click',createConf);
+
+                function setSource(e,s){
+                    if(srcSelect.has(s.id)){
+                        srcSelect.delete(s.id);
+                    }else{
+                        srcSelect.set(s.id,s);
+                    }
+                }
+
+                function createConf(){
+                    duree = time.value == '00:00' ? d3.randomInt(10, 3600)() : timeValueToSecond(time.value); 
+                    timer = new easytimer.Timer();
+                    numEvent = 1;
+                    d3.select('#currentTime').html('00:00:00');
+                    d3.select('#listeEvents').selectAll('li').remove();
+                    timer.start({precision: 'seconds', countdown: true, startValues: {seconds: duree}});
+                    newAlea();
+                    timer.addEventListener('secondsUpdated', function (e) {
+                        d3.select('#currentTime').html(timer.getTimeValues().toString());
+                    });
+                    timer.addEventListener('targetAchieved', function (e) {
+                        d3.select('#currentTime').html('FIN');
+                    });                
+                }
+                function timeValueToSecond(t){
+                    let aT = t.split(':');
+                    return aT.length == 3 ? parseInt(aT[0])*3600 + parseInt(aT[1])*60  + parseInt(aT[2]) : parseInt(aT[1])*60  + parseInt(aT[2]);  
+                }
+                function newAlea(){
+                    numEvent++;
+                    if(numEvent%2 == 0){
+                        //on choisi un locuteur une fois sur deux
+                        setLoc(sources.filter(s=>s.id=='btnLoc')[0]);
+                        return;
+                    }
+
+                    //sélectionne une source
+                    aleaSource = srcSelect.size==0 ?
+                            sources[d3.randomInt(0, sources.length-1)()]
+                        :
+                            Array.from(srcSelect)[d3.randomInt(0, srcSelect.size-1)()][1];
+                    if(aleaSource.fnct)
+                        exeFnct(aleaSource);
+                    else
+                        showUrlContent(aleaSource);
+                }
+                function exeFnct(src){
+                    switch (src.fnct) {
+                        case 'aleaDia':
+                            aleaDia();
+                            break;
+                        case 'setLoc':
+                            setLoc(src);
+                            break;
+                    }
+                }
+                function setLoc(src){
+                    let loc;
+                    if(!locuteurs){
+                        d3.csv(src.url)
+                        .then(data => {
+                            locuteurs = data;
+                            
+                            loc = locuteurs[d3.randomInt(0, locuteurs.length-1)()];
+                            setEvent();
+                            showChoix(loc['Votre prénom']+' '+loc['Votre nom'], loc['Votre affiliation']);
+                        });
+                    }else{
+                        loc = locuteurs[d3.randomInt(0, locuteurs.length-1)()];
+                        setEvent();
+                        showChoix(loc['Votre prénom']+' '+loc['Votre nom'], loc['Votre affiliation']);
+                    }
+                }
+                function aleaDia(){
+                    let conf = confs[d3.randomInt(0, confs.length-1)()];
+                    numDia = d3.randomInt(0, conf.diapos.length-1)();
+                    showDiapo(conf.urlSlide+'?diapo='+numDia);
+
+                    setEvent();
+
+                    showChoix(conf.infos.title, numDia);
+                }
+                function setEvent(){
+                    //définition du temps de l'event
+                    timerDia = new easytimer.Timer();
+                    timerDia.start({precision: 'seconds', countdown: true, startValues: {seconds: d3.randomInt(minTimeDia, maxTimeDia)()}});
+                    timerDia.addEventListener('secondsUpdated', function (e) {
+                        d3.select('#event_'+numEvent).html(timerDia.getTimeValues().toString());
+                    });
+                    timerDia.addEventListener('targetAchieved', function (e) {
+                        d3.select('#event_'+numEvent).attr('class','badge bg-danger rounded-pill');
+                        newAlea();
+                    });                
+                }
+                function showDiapo(url){
+                    d3.select("#aleaDiapo").style('display','block').attr('src',url);
+                    d3.select("#aleaCita").style('display','none');
+                }
+                function showUrlContent(src){
+                    d3.json(src.url)
+                    .then(data => {
+                        setEvent();
+                        d3.select("#aleaDiapo").style('display','none');
+                        showChoix(data[0]["dcterms:title"][0]["@value"], '');
+                        let html=data[0]["@type"]=="o:Media" ? 
+                            "<img src='"+data[0]["o:thumbnail_urls"].large+"' class='img-fluid' />"
+                            :
+                            data[0]["dcterms:description"][0]["@value"];
+                        d3.select("#aleaCita").style('display','block').html(html);                
+                    });                
+                }
+                function showChoix(body, num){
+                    //ajoute la définition du choix
+                    let li = d3.select('#listeEvents').append('li')
+                        .attr('class',"list-group-item d-flex justify-content-between align-items-start")
+                    let b = li.append('div').attr('class',"ms-2");
+                    b.append('span').html(num);
+                    b.append('div').attr('class',"fw-bold").html(body)
+                    li.append('span').attr('class',"badge bg-primary rounded-pill")
+                        .attr('id','event_'+numEvent)
+                        .html(timerDia.getTimeValues().toString());
+                    li.lower();
+                }
+
+            </script>
+
+            <main id='mainContent' class="px-3">
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h1 id="currentTime">00:00:00</h1>
+                        <ol id="listeEvents" class="list-group">
+                        </ol>                        
+                    </div>
+                    <div class="col-sm-8 bg-white">
+                        <iframe id="aleaDiapo" frameBorder="0"></iframe>
+                        <div id="aleaCita"></div>
+                    </div>
+                </div>
+            </div>
+                <div id="svgLoad"></div>
+            </main>            
+
+            <footer class="mt-auto text-white-50">
+                <h3>
+                    Générateur d'Analyse et de Valorisation d'un Usage Numérique.
+                </h3>
+                <p style="padding-top: 6px;">Design by <a href="https://samszo.univ-paris8.fr/"
+                        class="text-white">Samuel
+                        Szoniecky</a>
+                    <a target="_blank" href="https://www.univ-paris8.fr/EA-349-Laboratoire-Paragraphe">
+                        <img style="height: 40px;" src="asset/images/logos/logo-paragraphe-blanc.svg"
+                            alt="Laboratoire Paragraphe" />
+                    </a>
+                    <a target="_blank" href="https://github.com/samszo/ChaoticumSeminario/issues">
+                        <button type="button" class="btn btn-danger">
+                            <i class="fa-brands fa-github fa-2xl"></i>
+                        </button>                        
+                    </a>
+            Template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
+                href="https://twitter.com/mdo" class="text-white">@mdo</a>.
+        </p>
+    </footer>
+
+        </div>
+
+
+
+    </body>
+
+</html>
