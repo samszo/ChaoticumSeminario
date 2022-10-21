@@ -28,7 +28,7 @@
 }, {
     "id": "btnMoliere",
     "label": "Molière",
-    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94"
+    "url": "https://machinealire.univ-paris8.fr/LITTE_BOT/omk/api/items?resource_class_id=1021&sort_by=random&limit=1&offset=1&per_page=1"
 }, {
     "id": "btnGorafi",
     "label": "Gorafi",
@@ -36,7 +36,8 @@
 }, {
     "id": "btnMesostiche",
     "label": "Mesostiche",
-    "url": "https://samszo.github.io/mesostiche/image.html?w=300&h=300&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red"
+    "url": "https://samszo.github.io/mesostiche/image.html?w=800&h=600&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red",
+    "fnct":"showDiapo"
 }
 
 ]
