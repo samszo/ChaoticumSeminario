@@ -16,15 +16,9 @@
     "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR78NBpzHGiDEY4_ctyustAuMYS84QqXZp9H0o8ZQG-4yusRIU38ni2C2vybGN5p0IYvjR_WQAuxOBM/pub?gid=283903441&single=true&output=csv",
     "fnct": "setLoc"
 }, {
-    "id": "btnArcanesRapports",
-    "label": "Arcanes - Rapports",
-    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94",
-    "fnct": "setActant"
-}, {
-    "id": "btnArcanesBiblio",
-    "label": "Arcanes - Biblio",
-    "url": "https://arcanes.univ-paris8.fr/omk/admin/item?resource_class_id=94",
-    "fnct": "setActant"
+    "id": "btnArcanesSemi",
+    "label": "Arcanes - Séminaire",
+    "url": "http://localhost/omk_arcanes/s/edisem/page/ajax?helper=ChaoticumSeminario&action=getAleaFrag&json=1"
 }, {
     "id": "btnMoliere",
     "label": "Molière",
@@ -36,8 +30,8 @@
 }, {
     "id": "btnMesostiche",
     "label": "Mesostiche",
-    "url": "https://samszo.github.io/mesostiche/image.html?w=800&h=600&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red",
-    "fnct":"showDiapo"
+    "url": "http://localhost/mesostiche/image.html?w=800&h=600&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red",
+    "fnct":"showMesostiche"
 }
 
 ]

@@ -30,7 +30,8 @@
             width: 100%;            
         }
         #listeEvents{
-            overflow: scroll;
+            overflow-y: scroll;
+            overflow-x: hidden;
             height: 600px;
             width: 100%;            
         }
@@ -54,13 +55,20 @@
         }
         .autofirst{
             font-style: italic;
-            font-size: 1.5em;            
+            font-size: 1em;            
         }
         .l{
             font-style: italic;
-            font-size: 2em;            
+            font-size: 1em;            
         }
-
+        .mc{
+            padding: 1em;
+            font-size: 1em;            
+            color:#dc3545
+        }
+        .noscroll{
+            overflow-x: hidden;
+        }
         html, body {margin: 0; height: 100%; overflow: hidden}
 
     </style>
@@ -201,11 +209,13 @@
                 }
                 function newAlea(){
                     numEvent++;
+                    /*
                     if(numEvent%2 == 0){
                         //on choisi un locuteur une fois sur deux
                         setLoc(sources.filter(s=>s.id=='btnLoc')[0]);
                         return;
                     }
+                    */
 
                     //sélectionne une source
                     aleaSource = srcSelect.size==0 ?
@@ -225,8 +235,8 @@
                         case 'setLoc':
                             setLoc(src);
                             break;
-                        case 'showDiapo':
-                            showDiapo(src.url);
+                        case 'showMesostiche':
+                            showMesostiche(src);
                             break;
                     }
                 }
@@ -247,6 +257,12 @@
                         showChoix(loc['Nom'], loc['Organisation']);
                     }
                 }
+                function showMesostiche(src){
+                    showDiapo(src.url);
+                    setEvent();
+                    showChoix(src.label, "");                    
+                }
+
                 function aleaDia(){
                     let conf = confs[d3.randomInt(0, confs.length-1)()];
                     numDia = d3.randomInt(0, conf.diapos.length-1)();
@@ -279,6 +295,24 @@
                         setEvent();
                         d3.select("#aleaDiapo").style('display','none');
                         switch (src.id) {
+                            case "btnArcanesSemi":
+                                showChoix(data.item["o:title"]
+                                    , src.label);
+                                //affiche la vidéo
+                                html = '<video controls  autoplay="1" height="64%"><source src="'+data.media["o:original_url"]+'" type="video/ogg"></video>';
+                                //affiche la translation
+                                html += '<p>'+data.magic["dcterms:title"][0]["@value"]+'</p>';
+                                break;                                                                                    
+                            case "btnCita":
+                                showChoix(data[0]["dcterms:isPartOf"][0].display_title
+                                    +'<p>'+data[0]["o:title"]
+                                    +' ('+data[0]["dcterms:dateSubmitted"][0]["@value"]+')</p>'
+                                    , src.label+' - Zotero de '+data[0]["cito:isCompiledBy"][0].display_title);
+                                html = data[0]["dcterms:description"][0]["@value"]+'<p>';
+                                //récupère les mots clef
+                                data[0]["skos:semanticRelation"].forEach(mc=>html += '<span class="mc">'+mc.display_title+'</span>');
+                                html += '</p>';                                                            
+                                break;                            
                             case "btnMoliere":
                                 showChoix(data[0]["dcterms:isPartOf"][0].display_title
                                     +' : '+data[0]["dbo:speaker"][0].display_title
@@ -315,20 +349,23 @@
                     li.lower();
                 }
 
+                function positionneMesostiche(){
+                    console.log('positionneMesostiche');
+                }
             </script>
 
             <main id='mainContent' class="px-3">
 
             <div class="container-fluid text-center">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" >
                         <h1 id="currentTime">00:00:00</h1>
-                        <ol id="listeEvents" class="list-group">
+                        <ol id="listeEvents" class="list-group" >
                         </ol>                        
                     </div>
-                    <div class="col-sm-8 bg-black">
-                        <iframe class="bg-white" id="aleaDiapo" frameBorder="0"></iframe>
-                        <div id="aleaCita"></div>
+                    <div class="col-sm-8 bg-black" >
+                        <iframe class="bg-white noscroll" id="aleaDiapo" frameBorder="0"></iframe>
+                        <div id="aleaCita" class="noscroll"></div>
                     </div>
                 </div>
             </div>
@@ -337,7 +374,7 @@
 
             <footer class="mt-auto text-white-50">
                 <h3>
-                    Générateur de conférences fabriquées à l'aide de secrets chaotiques.
+                    Générateur de conférences à l'aide de secrets chaotiques.
                 </h3>
                 <p style="padding-top: 6px;">Design by <a href="https://samszo.univ-paris8.fr/"
                         class="text-white">Samuel
