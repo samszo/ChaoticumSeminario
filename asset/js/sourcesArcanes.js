@@ -18,7 +18,7 @@
 }, {
     "id": "btnArcanesSemi",
     "label": "Arcanes - Séminaire",
-    "url": "http://localhost/omk_arcanes/s/edisem/page/ajax?helper=ChaoticumSeminario&action=getAleaFrag&json=1"
+    "url": "https://arcanes.univ-paris8.fr/omk/s/edisem/page/ajax?helper=ChaoticumSeminario&action=getAleaFrag&json=1"
 }, {
     "id": "btnMoliere",
     "label": "Molière",
@@ -30,7 +30,7 @@
 }, {
     "id": "btnMesostiche",
     "label": "Mesostiche",
-    "url": "http://localhost/mesostiche/image.html?w=800&h=600&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red",
+    "url": "https://samszo.github.io/mesostiche/image.html?w=800&h=600&regle=ARCANES&responsive=1&fctEnd=positionneMesostiche&cTexte=black&cRegle=red",
     "fnct":"showMesostiche"
 }
 
