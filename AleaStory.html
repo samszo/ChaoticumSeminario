@@ -176,17 +176,9 @@
                 timer, timerDia,
                 time = d3.select('#confDuree').node(),                
                 duree, minTimeDia = 10, maxTimeDia = 30, numEvent,
-                confs, sources, srcSelect = new Map(), aleaSource, locuteurs;
+                confs, sources, srcSelect = [], aleaSource, locuteurs;
                                 
                 d3.select('#btnNewAlea').on('click',createConf);
-
-                function setSource(e,s){
-                    if(srcSelect.has(s.id)){
-                        srcSelect.delete(s.id);
-                    }else{
-                        srcSelect.set(s.id,s);
-                    }
-                }
 
                 function createConf(){
                     duree = time.value == '00:00' ? d3.randomInt(10, 3600)() : timeValueToSecond(time.value); 
@@ -218,7 +210,7 @@
                     */
 
                     //sélectionne une source
-                    aleaSource = srcSelect.size==0 ?
+                    aleaSource = srcSelect.length==0 ?
                             sources[d3.randomInt(0, sources.length-1)()]
                         :
                             Array.from(srcSelect)[d3.randomInt(0, srcSelect.size-1)()][1];
