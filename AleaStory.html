@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aléa Arcanes</title>
     <!-- CSS only -->
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="asset/css/bootstrap5.3.min.css" rel="stylesheet" >
     <!-- JavaScript Bundle with Popper -->
-    <script src="asset/js/bootstrap.bundle.min.js" ></script>
+    <script src="asset/js/bootstrap5.3.bundle.min.js" ></script>
     <script src="asset/js/d3.min.js"></script>
     <script src="asset/js/anime.min.js"></script>
     <script src="asset/js/all.min.js"></script>
     <script src="asset/js/amazelogo.js"></script>
     <script src="asset/js/easytimer.min.js"></script>
     <link rel="stylesheet" href="asset/css/treeselect.css" />
-    <script type="module" src="asset/js/treeselect.js"></script>
   
     <style>
         #logoMazePetit {
@@ -28,10 +27,6 @@
             width: 0px;
             visibility: hidden;
         }
-        #aleaDiapo{
-            height: 650px;
-            width: 100%;            
-        }
         #listeEvents{
             overflow-y: scroll;
             overflow-x: hidden;
@@ -42,14 +37,21 @@
             width: max-content;
         }
 
-        #aleaCita{
-            display: none;
+        #aleaScene{
             background-color: black;
             color: white;
             font-size: 2em;
+            padding: 2px;
+        }
+
+        #aleaSceneOld{
+            display: block;
             overflow: scroll;
             height: 650px;
             vertical-align: middle;
+            background-color: black;
+            color: white;
+            font-size: 2em;
             padding: 2px;
         }
 
@@ -98,7 +100,7 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-2 align-middle">
+                                <ul id="navbarMain" class="navbar-nav me-auto mb-2 mb-lg-2 align-middle">
 
                                     <li class="nav-item mx-2">
                                         <a class="nav-link" target="_blank"
@@ -137,15 +139,6 @@
                                     </li>
                               
                                     <li class="nav-item ms-2 me-1">
-                                        <div class="dropdown" >
-                                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                              Sources
-                                            </button>
-                                            <ul id="listeSources" class="dropdown-menu dropdown-menu-dark">
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item ms-2 me-1">
                                         <p class="fs-2">Durée :</p>
                                     </li>
                                     <li class="nav-item ms-1 me-2">
@@ -172,142 +165,7 @@
                         ,
                     'colorPoint': 'none',
                     'textes': ['ALEA', 'STORY', 'GENERATOR', 'ARTEC','RIT','PARIS8']
-                }),
-                timer, timerDia,
-                time = d3.select('#confDuree').node(),                
-                duree, minTimeDia = 10, maxTimeDia = 30, numEvent,
-                confs, sources, srcSelect = [], aleaSource, locuteurs;
-                                
-                d3.select('#btnNewAlea').on('click',createConf);
-
-                function createConf(){
-                    duree = time.value == '00:00' ? d3.randomInt(10, 3600)() : timeValueToSecond(time.value); 
-                    timer = new easytimer.Timer();
-                    numEvent = 1;
-                    d3.select('#currentTime').html('00:00:00');
-                    d3.select('#listeEvents').selectAll('li').remove();
-                    timer.start({precision: 'seconds', countdown: true, startValues: {seconds: duree}});
-                    newAlea();
-                    timer.addEventListener('secondsUpdated', function (e) {
-                        d3.select('#currentTime').html(timer.getTimeValues().toString());
-                    });
-                    timer.addEventListener('targetAchieved', function (e) {
-                        d3.select('#currentTime').html('FIN');
-                    });                
-                }
-                function timeValueToSecond(t){
-                    let aT = t.split(':');
-                    return aT.length == 3 ? parseInt(aT[0])*3600 + parseInt(aT[1])*60  + parseInt(aT[2]) : parseInt(aT[1])*60  + parseInt(aT[2]);  
-                }
-                function newAlea(){
-                    numEvent++;
-                    /*
-                    if(numEvent%2 == 0){
-                        //on choisi un locuteur une fois sur deux
-                        setLoc(sources.filter(s=>s.id=='btnLoc')[0]);
-                        return;
-                    }
-                    */
-
-                    //sélectionne une source
-                    aleaSource = srcSelect.length==0 ?
-                            sources[d3.randomInt(0, sources.length-1)()]
-                        :
-                            Array.from(srcSelect)[d3.randomInt(0, srcSelect.size-1)()][1];
-                    if(aleaSource.fnct)
-                        exeFnct(aleaSource);
-                    else
-                        showUrlContent(aleaSource);
-                }
-                function exeFnct(src){
-                    switch (src.fnct) {
-                        case 'genStory':
-                            genStory(src);
-                            break;
-                    }
-                }
-                function genStory(src){
-                    showDiapo(src.url);
-                    setEvent();
-                    showChoix(src.label, "");                    
-                }
-
-                function setEvent(){
-                    //définition du temps de l'event
-                    timerDia = new easytimer.Timer();
-                    timerDia.start({precision: 'seconds', countdown: true, startValues: {seconds: d3.randomInt(minTimeDia, maxTimeDia)()}});
-                    timerDia.addEventListener('secondsUpdated', function (e) {
-                        d3.select('#event_'+numEvent).html(timerDia.getTimeValues().toString());
-                    });
-                    timerDia.addEventListener('targetAchieved', function (e) {
-                        d3.select('#event_'+numEvent).attr('class','badge bg-danger rounded-pill');
-                        newAlea();
-                    });                
-                }
-                function showDiapo(url){
-                    d3.select("#aleaDiapo").style('display','block').attr('src',url);
-                    d3.select("#aleaCita").style('display','none');
-                }
-                function showUrlContent(src){
-                    let html="";
-                    d3.json(src.url)
-                    .then(data => {
-                        setEvent();
-                        d3.select("#aleaDiapo").style('display','none');
-                        switch (src.id) {
-                            case "btnArcanesSemi":
-                                showChoix(data.item["o:title"]
-                                    , src.label);
-                                //affiche la vidéo
-                                html = '<video controls  autoplay="1" height="64%"><source src="'+data.media["o:original_url"]+'" type="video/ogg"></video>';
-                                //affiche la translation
-                                html += '<p>'+data.magic["dcterms:title"][0]["@value"]+'</p>';
-                                break;                                                                                    
-                            case "btnCita":
-                                showChoix(data[0]["dcterms:isPartOf"][0].display_title
-                                    +'<p>'+data[0]["o:title"]
-                                    +' ('+data[0]["dcterms:dateSubmitted"][0]["@value"]+')</p>'
-                                    , src.label+' - Zotero de '+data[0]["cito:isCompiledBy"][0].display_title);
-                                html = data[0]["dcterms:description"][0]["@value"]+'<p>';
-                                //récupère les mots clef
-                                data[0]["skos:semanticRelation"].forEach(mc=>html += '<span class="mc">'+mc.display_title+'</span>');
-                                html += '</p>';                                                            
-                                break;                            
-                            case "btnMoliere":
-                                showChoix(data[0]["dcterms:isPartOf"][0].display_title
-                                    +' : '+data[0]["dbo:speaker"][0].display_title
-                                    , src.label);
-                                html = data[0]["bibo:content"][0]["@value"];                                                            
-                                break;                            
-                            case "btnGorafi":
-                                showChoix(data[0]["dcterms:subject"][0]["@value"]
-                                    +' : '+data[0]["dcterms:date"][0]["@value"]
-                                    +' : '+data[0]["dcterms:description"][0]["@value"], src.label);
-                                html = "<img src='"+data[0]["thumbnail_display_urls"].large+"' class='img-fluid' />"
-                                    +"<h2>"+data[0]["dcterms:title"][0]["@value"]+"<h2>";                                                            
-                                break;
-                            case "btnDia":
-                                showChoix(data[0]["dcterms:title"][0]["@value"], src.label);
-                                html = "<img src='"+data[0]["o:thumbnail_urls"].large+"' class='img-fluid' />";                                                            
-                                break;                        
-                            default:
-                                break;
-                        }
-                        d3.select("#aleaCita").style('display','block').html(html);                
-                    });                
-                }
-                function showChoix(body, num){
-                    //ajoute la définition du choix
-                    let li = d3.select('#listeEvents').append('li')
-                        .attr('class',"list-group-item d-flex justify-content-between align-items-start")
-                    let b = li.append('div').attr('class',"ms-2");
-                    b.append('span').html(num);
-                    b.append('div').attr('class',"fw-bold").html(body)
-                    li.append('span').attr('class',"badge bg-primary rounded-pill")
-                        .attr('id','event_'+numEvent)
-                        .html(timerDia.getTimeValues().toString());
-                    li.lower();
-                }
+                });
 
                 function positionneMesostiche(){
                     console.log('positionneMesostiche');
@@ -317,6 +175,11 @@
             <main id='mainContent' class="px-3">
 
             <div class="container-fluid text-center">
+                <div class="collapse" id="alertPatience">
+                    <div class="alert alert-danger" role="alert">
+                        PLEASE WAIT...
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-4" >
                         <h1 id="currentTime">00:00:00</h1>
@@ -324,8 +187,8 @@
                         </ol>                        
                     </div>
                     <div class="col-sm-8 bg-black" >
-                        <iframe class="bg-white noscroll" id="aleaDiapo" frameBorder="0"></iframe>
-                        <div id="aleaCita" class="noscroll"></div>
+                        <div id="aleaScene" class="text-center">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,6 +219,248 @@
         </div>
 
 
+        <script type="module" >
+
+
+import { Treeselect } from './asset/js/treeselectjs.mjs.js'
+import {auth} from './modules/auth.js';
+import {moteur} from './modules/moteur.js';
+
+let a = new auth({'navbar':d3.select('#navbarMain'),
+    }),
+    m = new moteur({'apiUrl':'http://localhost/generateur/apiRead.php','id_dico':169,'id_oeu':72}),
+    genPrompt = "#label#, illustration by [actant_illustrator]" //""[prompt_scene]"
+    ;
+
+a.getUser(u=>{
+    console.log(u);
+});
+
+let timer, timerDia,
+                time = d3.select('#confDuree').node(),                
+                duree, minTimeDia = 20, maxTimeDia = 30, numEvent,
+                confs, storiesSelect = [], chooseStory, locuteurs,
+    slot = document.createElement('div'),
+    domElement = document.querySelector('.treeselect-demo'),
+    options = [], stories = [], jsonS=[]    
+    ;
+slot.innerHTML = '<a class="treeselect-demo__slot" href="">Click!</a>';
+slot.addEventListener('click', (e) => {
+  e.preventDefault()
+  alert('Slot click!')
+})
+//ajoute les alertes
+const alertPatience = new bootstrap.Collapse('#alertPatience', {toggle: false});
+alertPatience.show();
+
+//add stories                
+d3.json("asset/js/sourcesGenStory2023.js")
+    .then(data => {
+        data.forEach((s,i) => {
+          options.push({name: s.label,value:'s_'+i,children: []});
+          jsonS.push(d3.json(s.url));          
+        });
+        Promise.all(jsonS).then((values) => {
+            values.forEach((dataStory,j)=>{
+                dataStory.forEach(ds=>{
+                    let id = 's_'+j+'c'+ds['o:id'];
+                    options[j].children.push({name: ds['o:title'],value:id,children: []}); 
+                    stories.push({'id':id,'o':ds,'scenes':[]});
+                })
+            });
+            const treeselect = new Treeselect({
+                parentHtmlContainer: domElement,
+                value: [],
+                options: options,
+                listSlotHtmlComponent: slot
+            })
+            treeselect.srcElement.addEventListener('input', (e) => {
+                console.log('Selected value:', e.detail)
+                storiesSelect=[];
+                e.detail.forEach(id=>{
+                    storiesSelect.push(stories.filter(s=>s.id==id)[0]);
+                });
+            })
+            alertPatience.hide();            
+        });
+    });
+                        
+        d3.select('#btnNewAlea').on('click',createStory);
+
+        function createStory(){
+            duree = time.value == '00:00' ? d3.randomInt(10, 3600)() : timeValueToSecond(time.value); 
+            timer = new easytimer.Timer();
+            numEvent = 1;
+            d3.select('#currentTime').html('00:00:00');
+            d3.select('#listeEvents').selectAll('li').remove();
+            timer.start({precision: 'seconds', countdown: true, startValues: {seconds: duree}});
+            newEvent();
+            timer.addEventListener('secondsUpdated', function (e) {
+                d3.select('#currentTime').html(timer.getTimeValues().toString());
+            });
+            timer.addEventListener('targetAchieved', function (e) {
+                d3.select('#currentTime').html('FIN');
+            });                
+        }
+        function timeValueToSecond(t){
+            let aT = t.split(':');
+            return aT.length == 3 ? parseInt(aT[0])*3600 + parseInt(aT[1])*60  + parseInt(aT[2]) : parseInt(aT[1])*60  + parseInt(aT[2]);  
+        }
+        function newEvent(){
+            numEvent++;
+            //select a story
+            chooseStory = storiesSelect.length==0 ? rdmElement(stories):rdmElement(storiesSelect);
+            exeFnct(chooseStory);
+        }
+        function exeFnct(story){
+            switch (story['genstory:hasFonction']) {
+                case 'genStory':
+                    genStory(story);
+                    break;
+                default:
+                    genStory(story);
+                    break;
+            }
+        }
+        function genStory(story){
+            setEvent(story);
+            //The description of the story is displayed only at the first scene
+            if(story.scenes.length==0){
+                story.o["o:title"] += ' : '+Date.now();
+                showChoix(story.o["dcterms:description"] ? story.o["dcterms:description"][0]['@value']: ""
+                    ,story.o["o:title"]);
+                if(a.omk){
+                    alertPatience.show();            
+                    timer.pause();
+                    timerDia.pause();
+                    a.omk.createItem({
+                        "o:resource_class":"genstory:histoire", 
+                        "dcterms:title":story.o["o:title"], 
+                        "dcterms:description":'Generate Story',
+                        "dcterms:isReferencedBy":story.o["@id"]
+                    },
+                    i=>{
+                        alertPatience.hide();            
+                        timer.start();
+                        timerDia.start();
+                        story.idSave=i['o:id'];
+                        showScene(story);
+                    });
+                }
+            }else
+                showScene(story);
+        }
+
+        function setEvent(story){
+            //définition du temps de l'event
+            timerDia = new easytimer.Timer();
+            timerDia.start({precision: 'seconds', countdown: true, 
+                startValues: {seconds: d3.randomInt(minTimeDia, maxTimeDia)()}
+            });
+            timerDia.addEventListener('secondsUpdated', function (e) {
+                d3.select('#event_'+numEvent).html(timerDia.getTimeValues().toString());
+            });
+            timerDia.addEventListener('targetAchieved', function (e) {
+                d3.select('#event_'+numEvent).attr('class','badge bg-danger rounded-pill');
+                newEvent();
+            });                
+        }
+        function rdmElement(a){
+            const shuffled = d3.shuffle(a.slice());            
+            return shuffled[0];
+        }
+        function showScene(story){
+            let scene = {'label':'','elements':[],'image':false};
+            /*alea choose of one element of each type in a story
+            let elements=[
+                {p:'genstory:hasEvenement',v:false},
+                {p:'genstory:hasActant',v:false},
+                {p:'genstory:hasAffect',v:false},
+                {p:'genstory:hasLieu',v:false},
+                {p:'genstory:hasObjet',v:false},
+            ];
+            elements.forEach(e=>{
+                if(story.o[e.p]){
+                    //choose the element
+                    e.v = rdmElement(story.o[e.p]);
+                    scene.label +='<p>'+e.v['property_label']+' : ';
+                    scene.label += e.v["display_title"]?e.v["display_title"]:e.v["@value"];
+                    scene.label += '</p>';
+                    scene.elements.push(e); 
+                }
+            })
+            */
+            //choose evenement in order
+            if(story.o['genstory:hasEvenement'] && story.o['genstory:hasEvenement'].length > story.scenes.length){
+                //choose the element
+                let e = story.o['genstory:hasEvenement'][story.scenes.length];
+                scene.label = e["display_title"]?e["display_title"]:e["@value"];
+                scene.elements.push({p:'genstory:hasEvenement',v:e}); 
+            }
+            if(!scene.label){
+                showChoix("End of the Story",'');
+                timer.stop();
+                timerDia.stop();
+                return;
+            }
+            //
+            scene.title=story.o["o:title"]+' : '+'Scene '+story.scenes.length;
+            story.scenes.push(scene);
+            if(!a.oai){
+                showChoix(scene.label,'Scene '+story.scenes.length);
+            }else{
+                timer.pause();
+                timerDia.pause();
+                m.strct=[];
+                m.texte="";
+                m.genere(genPrompt,true,true);
+                scene.prompt = m.texte.replace('#label#',scene.label);
+                showChoix(scene.prompt,'Scene '+story.scenes.length);
+                a.oai.getImage(scene.prompt,1,r=>{
+                    scene.image=r.data[0].url;
+                    buildScene(scene);
+                    if(a.omk){
+                        //data for save
+                        let data = {
+                            "o:resource_class":"genstory:scene", 
+                            "dcterms:title":scene.title, 
+                            "dcterms:description":scene.prompt,
+                            "genstory:hasHistoire":{'rid':story.idSave},
+                            "genstory:hasParam":JSON.stringify(m.strct),
+                            "o:media":r.data[0].url, 
+                        };
+                        scene.elements.forEach(e=>{
+                            if(!data['labels'])data['labels']=[];
+                            data['labels'].push({'p':e.v.property_label,'u':e.v["@id"],'l':e.v.display_title});
+                        });
+                        a.omk.createItem(data,i=>scene.idSave=i['o:id']);
+                    }
+                    timer.start();
+                    timerDia.start();
+                });
+
+            }
+        }
+
+        function buildScene(scene){
+            let html=`<img src="${scene.image}" style="height:650px;" class="rounded mx-auto d-block" alt="OpenaiImage" />`;
+            d3.select('#aleaScene').html(html);
+        }
+
+        function showChoix(body, num){
+            //ajoute la définition du choix
+            let li = d3.select('#listeEvents').append('li')
+                .attr('class',"list-group-item d-flex justify-content-between align-items-start")
+            let b = li.append('div').attr('class',"ms-2");
+            b.append('span').html(num);
+            b.append('div').attr('class',"fw-bold").html(body)
+            li.append('span').attr('class',"badge bg-primary rounded-pill")
+                .attr('id','event_'+numEvent)
+                .html(timerDia.getTimeValues().toString());
+            li.lower();
+        }
+
+        </script>
 
     </body>
 
