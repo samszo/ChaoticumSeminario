@@ -74,7 +74,7 @@ export class auth {
                         </span>
                         <input id="authOpenaiOrga" type="password" class="form-control" placeholder="OpenAi Organisation Id" aria-describedby="orgaOpenai">
                         </div>
-
+                        
 
                         <div class="collapse" id="alertAuth">
                             <div  class="alert alert-danger d-flex align-items-center" role="alert">
@@ -175,7 +175,9 @@ export class auth {
         }
 
         this.getUser = function (cb){
-            //vérifie la connexion à open ai
+            //vérifie la connexion à open ai             
+            me.keyOpenai = me.keyOpenai ? me.keyOpenai : me.m.select("#authOpenaiKey").node().value;
+            me.orgaOpenai = me.orgaOpenai ? me.orgaOpenai : me.m.select("#authOpenaiOrga").node().value;
             if(me.keyOpenai && me.orgaOpenai){
                 me.oai = new openai({'key':me.keyOpenai,'orga':me.orgaOpenai});
                 me.oai.getModels(m=>{
@@ -195,7 +197,7 @@ export class auth {
             me.mail = me.mail ? me.mail : me.m.select("#authMail").node().value;
             me.ident = me.ident ? me.ident : me.m.select("#authIdent").node().value;
             me.key = me.key ? me.key : me.m.select("#authPwd").node().value;
-            if(!me.mail || !me.ident || !me.key || !me.apiOmk){
+            if(cb && (!me.mail || !me.ident || !me.key || !me.apiOmk)){
                 cb(me.user);
             }else{
                 me.omk = new omk({'api':me.apiOmk,'key':me.key,'ident':me.ident,'mail':me.mail});
@@ -212,7 +214,7 @@ export class auth {
                         me.user.id=me.user['o:id'];
                         me.modal.hide();
                     }
-                    cb(me.user);
+                    if(cb)cb(me.user);
                 })    
             };
         }
