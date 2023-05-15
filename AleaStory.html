@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aléa Arcanes</title>
+    <title>Alea Story</title>
     <!-- CSS only -->
     <link href="asset/css/bootstrap5.3.min.css" rel="stylesheet" >
     <!-- JavaScript Bundle with Popper -->
@@ -222,13 +222,13 @@
         <script type="module" >
 
 
-import { Treeselect } from './asset/js/treeselectjs.mjs.js'
+import {Treeselect} from './asset/js/treeselectjs.mjs.js'
 import {auth} from './modules/auth.js';
 import {moteur} from './modules/moteur.js';
 
 let a = new auth({'navbar':d3.select('#navbarMain'),
     }),
-    m = new moteur({'apiUrl':'http://localhost/generateur/apiRead.php','id_dico':169,'id_oeu':72}),
+    m = new moteur({'apiUrl':'https://www.jardindesconnaissances.fr/balpien/apiRead.php','id_dico':169,'id_oeu':72}),
     genPrompt = "#label#, illustration by [actant_illustrator]" //""[prompt_scene]"
     ;
 
