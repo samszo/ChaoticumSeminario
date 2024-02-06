@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alea EDISEM</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    .aleaItem{
+        position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <h1>EDISEM : alea item</h1>
+  <h2 id="progressLogEl"></h2>
+  <h2 id="beginLogEl"></h2>
+  <h2 id="completeLogEl"></h2>
+  <div id="aleaItems"></div>
+
+  <script>
+    // Make an HTTP request
+    const request = new XMLHttpRequest();
+    let items = [],
+        progressLogEl=d3.select("#progressLogEl"),
+        beginLogEl=d3.select("#beginLogEl"),
+        completeLogEl=d3.select("#completeLogEl"),
+        changeBegan = 0,
+        changeCompleted = 0;
+
+    request.open('GET', 'https://edisem.arcanes.ca/omk/api/items?owner_id=9&limit=0&per_page=1000', true);
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        items = JSON.parse(request.responseText);
+        AleaItem();
+      } else {
+        console.error('Error: ' + request.status);
+      }
+    };
+    request.onerror = function() {
+      console.error('Request failed');
+    };
+    request.send();
+
+    function AleaItem(){
+        d3.shuffle(items);
+        let aleaItems = items.slice(0, 6),  ai = d3.select("#aleaItems").selectAll("div").data(aleaItems);
+        ai.join(
+            enter => {
+                let div= enter.append("div").attr('class','aleaItem');
+                div.append('span').attr('id',(d,i)=>'span'+i).text(d=>{
+                    return d['o:title']
+                });
+                div.append('a').attr('id',(d,i)=>'a'+i).attr('target','_blank').attr('href',d=>d['@id'].replace('api/items','s/miara/item'))
+                    .append('img').attr('id',(d,i)=>'img'+i).attr('src',d=>{
+                        return d.thumbnail_display_urls.square ? d.thumbnail_display_urls.square : 'asset/images/logos/logo-arcanes-ptit.png'
+                    })
+            },
+            update => {
+                update.each((d,i)=>{
+                    update.select("#span"+i).text(d=>{
+                        return d['o:title']
+                    });
+                    update.select("#a"+i).attr('href',d=>d['@id'].replace('api/items','s/miara/item'))
+                    update.select("#img"+i).attr('src',d=>{
+                        return d.thumbnail_display_urls.square ? d.thumbnail_display_urls.square : 'asset/images/logos/logo-arcanes-ptit.png'
+                    })
+                })
+            },
+            exit => exit.remove()
+        )
+        animeAlea();
+
+    }
+
+    function animeAlea(){
+        anime({
+            targets: '.aleaItem',
+            delay: function(el, i) { return i * 100; },
+            endDelay: 1000,
+            loop: false,
+            translateX: function() {
+                return anime.random(0, 800);
+            },
+            translateY: function() {
+                return anime.random(0, 600);
+            },
+            easing: 'easeInOutCirc',
+            update: function(anim) {
+                progressLogEl.text('progress : ' + Math.round(anim.progress) + '%');
+                //beginLogEl.text('began : ' + anim.began);
+                //completeLogEl.text('completed : ' + anim.completed);
+            },
+            begin: function(anim) {
+                changeBegan++;
+                beginLogEl.text('change began : ' + changeBegan);
+            },
+            complete: function(anim) {
+                changeCompleted++;
+                completeLogEl.text('change completed : ' + changeCompleted);
+                AleaItem();
+            }
+        });
+
+    }
+
+  </script>
+</body>
+</html>
