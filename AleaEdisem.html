@@ -104,5 +104,23 @@
     }
 
   </script>
+
+  <script type="module">
+        import {omk} from './modules/omk.js';
+        let o = new omk({'api':'https://edisem.arcanes.ca/omk/api/'
+            ,'key':'bwrCRB8M6T3oUfUOHf5aCOnk4IMWONyO'
+            ,'ident':'ExIKLQXa69HJ2kOC3w3tjHN2jvGrF12G'
+            ,'mail':"samuel.szoniecky@univ-paris8.fr"});
+        let stories = o.searchItems('owner_id=9');
+        console.log(stories);
+        o.createItem({
+                        "dcterms:title":"TEST", 
+                        "dcterms:description":'TEST',
+                    },i=>{
+                        console.log(i);
+                    });
+
+
+  </script>
 </body>
 </html>

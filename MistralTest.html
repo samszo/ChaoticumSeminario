@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistral Test Page</title>
+    <script src="asset/js/d3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea id="input"></textarea>        
+        <div id="output"></div>
+    </div>
+</body>
+<script type="module">
+    import Ollama from "./modules/ollama.js";
+    /*
+    const response = await new Ollama({
+        model: "Mistral",
+        url: "http://127.0.0.1:11434/api/"
+        }).prompt(d3.select('#prompt').text());
+    console.log(response);
+    d3.select('#reponse').text(response.response);
+    */
+    function setup(){
+
+        const input = document.getElementById("input");
+        const output = d3.select("#output");
+        let divR;
+
+        const ol = new Ollama({
+            model: "Mistral",
+            url: "http://127.0.0.1:11434/api/"
+        })        
+        const on_response = (error,r) => {
+            if (error) {
+                console.error(error)
+            }
+            else if (r.done) {
+                // done!
+            }
+            else {
+                divR.append('span').text(r.response);
+            }
+        }
+
+        input.addEventListener("keyup",async (event) => {
+            if (event.key === "Enter") {
+                output.append('h1').text(input.value);
+                divR = output.append('div')
+                await ol.prompt_stream(input.value,on_response)
+                input.value = ""
+            }
+        })        
+    }
+    setup();
+</script>
+</html>
