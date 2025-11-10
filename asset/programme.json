@@ -1,0 +1,505 @@
+{
+    "programme": {
+        "titre": "Programme du colloque 01Design 13",
+        "jours": [
+            {
+                "id": "j0",
+                "debut": "2025-12-11T09:00:00"
+            },
+            {
+                "id": "j1",
+                "debut": "2025-12-12T09:00:00"
+            }
+        ],
+        "sessions": [
+            {
+                "id": "sAc",
+                "titre": "Accueil et Inscriptions",
+                "jour": "j0",
+                "ordre": 1
+            },
+            {
+                "id": "sOuv",
+                "titre": "Ouverture du colloque",
+                "jour": "j0",
+                "ordre": 2,
+                "speakers": [
+                    {
+                        "nom": "Samuel Szoniecky",
+                        "affiliation": "Paragraphe, Université de Paris 8, France",
+                        "role": "Modérateur"
+                    }
+                ]                
+            },
+            {
+                "id": "sPause1",
+                "titre": "Pause Café",
+                "jour": "j0",
+                "ordre": 3
+            },
+            {
+                "id": "sDesingIntelArti",
+                "titre": "Session : design des intelligences artificielles",
+                "jour": "j0",
+                "speakers": [
+                    {
+                        "nom": "-",
+                        "affiliation": "-",
+                        "role": "Modérateur"
+                    }
+                ],
+                "ordre": 4
+            },
+            {
+                "id": "sRepas1",
+                "titre": "Repas",
+                "jour": "j0",
+                "ordre": 5
+            },
+            {
+                "id": "sScienceMetho",
+                "titre": "Session : intelligences scientifique et méthodologique",
+                "jour": "j0",
+                "speakers": [
+                    {
+                        "nom": "-",
+                        "affiliation": "-",
+                        "role": "Modérateur"
+                    }
+                ],
+                "ordre": 6
+            },
+            {
+                "id": "sAc1",
+                "titre": "Accueil et Inscriptions",
+                "jour": "j1",
+                "ordre": 0
+            },
+            {
+                "id": "sRepas2",
+                "titre": "Repas",
+                "jour": "j1",
+                "ordre": 4
+            },
+            {
+                "id": "sDesingIntelCo",
+                "titre": "Session : design des intelligences collectives",
+                "jour": "j1",
+                "speakers": [
+                    {
+                        "role": "Modérateur",                       
+                        "nom": "-",
+                        "affiliation": "-"
+                    }
+                ],
+                "ordre": 1
+            },
+            {
+                "id": "sPause2",
+                "titre": "Pause Café",
+                "jour": "j1",
+                "ordre": 2
+            },
+            {
+                "id": "sCreInno",
+                "titre": "Session : création et innovation",
+                "jour": "j1",
+                "speakers": [
+                    {
+                        "role": "Modérateur",                       
+                        "nom": "-",
+                        "affiliation": "-"
+                    }
+                ],
+                "ordre": 3
+            },
+            {
+                "id": "sCloture",
+                "titre": "Cloture de la conférence",
+                "jour": "j1",
+                "ordre": 555,
+                "speakers": [
+                    {
+                        "nom": "Samuel Szoniecky",
+                        "affiliation": "Paragraphe, Université de Paris 8, France",
+                        "role": "Modérateur"
+                    }
+                ]     
+            },
+            {
+                "id": "sGala",
+                "titre": "Soirée de gala",
+                "debut": "2025-12-11T19:30:00",
+                "jour": "j0",
+                "speakers": [
+                    {
+                        "nom": "---",
+                        "role": "Organisateur"
+                    }
+                ],
+                "ordre": 9
+            }
+        ],
+        "interventions": [
+            {
+                "titre": "Diner dans un endroit trop bien...",
+                "session": "sGala",
+                "speakers": [
+                    {
+                        "nom": "Des gens trop sympas",
+                        "role": "Organisateur"
+                    }
+                ],
+                "ordre": 2,
+                "duree": 180
+            },
+            {
+                "titre": "KARAOKE PARTY !!!",
+                "session": "sGala",
+                "speakers": [
+                    {
+                        "nom": "La voie des voix",
+                        "role": "Organisateur"
+                    }
+                ],
+                "ordre": 3,
+                "duree": 180
+            },
+            {
+                "titre": "",
+                "session": "sAc",
+                "ordre": 2,
+                "duree": 30
+            },
+            {
+                "titre": "",
+                "session": "sAc1",
+                "ordre": 1,
+                "duree": 30
+            },
+            {
+                "speakers": [
+                    {
+                        "nom": "Lise VERLAET",
+                        "affiliation": "UR LHUMAIN, Université de Montpellier Paul-Valéry, France"
+                    },
+                    {
+                        "nom": "Franck RENUCCI",
+                        "affiliation": "IMSIC, Université de Toulon, France"
+                    },
+                    {
+                        "nom": "Khaldoun ZREIK",
+                        "affiliation": "Paragraphe, Université de Paris 8, France"
+                    }
+                ],
+                "titre": "Allocution de bienvenue",
+                "session": "sOuv",
+                "ordre": 1,
+                "duree": 30
+            },
+            {
+                "titre": "",
+                "session": "sPause1",
+                "ordre": 8,
+                "duree": 20
+            },
+            {
+                "id": 4361,
+                "speakers": [
+                    {
+                        "nom": "Bruno BACHIMONT",
+                        "affiliation": "Université de technologie de Compiègne, France"
+                    }
+                ],
+                "titre": "Discours d'ouverture : formes d'intelligence et intelligences des formes.",                
+                "session": "sOuv",
+                "ordre": 4,
+                "duree": 40
+            },
+            {
+                "titre": "Table ronde",
+                "abstract": "Questions aux orateurs, remarques du public",
+                "session": "sOuv",
+                "ordre": 40,
+                "duree": 30
+            },
+            {
+                "titre": "Co-concevoir l’intelligence : pour un design participatif des technologies de santé numérique",
+                "speakers": [
+                    {
+                        "nom": "Balkis Ellouze",
+                        "affiliation": "ISAMS | CES Lab, ENIS - Université de Sfax, Tunisie"
+                    }
+                ],
+                "proposition": "",
+                "session": "sDesingIntelCo",
+                "ordre": 6,
+                "duree": 20
+            },
+            {
+                "titre": "Table ronde",
+                "abstract": "Questions aux orateurs, remarques du public",
+                "session": "sDesingIntelCo",
+                "ordre": 789,
+                "duree": 30
+            },
+            {
+                "titre": "",
+                "session": "sPause2",
+                "ordre": 8,
+                "duree": 20
+            },            
+            {
+                "titre": "Les 3 C : Création, connexion, cognition ou comment rêver une hybridité éthique en didactique des langues",
+                "speakers": [
+                    {
+                        "nom": "Fanny Macé",
+                        "affiliation": "Département d'Études Françaises - Langue et Linguistique, Université Concordia, Canada"
+                    }
+                ],
+                "proposition": "",
+                "session": "sCreInno",
+                "ordre": 6,
+                "duree": 20
+            },
+            {
+                "titre": "Table ronde",
+                "abstract": "Questions aux orateurs, remarques du public",
+                "session": "sCreInno",
+                "ordre": 9,
+                "duree": 30
+            },
+            {
+                "titre": "",
+                "session": "sRepas1",
+                "ordre": 1,
+                "duree": 90
+            },
+            {
+                "id": 9281,
+                "titre":  "Design de l'intelligence - l'espacentre - labyrinthe cognitif et IA",
+                "speakers": [
+                    {
+                        "nom": "Christian Blanes",
+                        "affiliation": "Laboratoire de psychologie cognitive - Université Aix-Marseille, France"
+                    },
+                    {
+                        "nom": "Christelle Lemaire",
+                        "affiliation": "Laboratoire Parole et Langage - Université Aix-Marseille, France"
+                    }
+                ],
+                "session": "sDesingIntelArti",
+                "ordre": 4,
+                "duree": 20
+            },
+            {
+                "id": 164,
+                "titre": "Un design sonore organisationnel : l’annonce du SAMU de Saint-Étienne",
+                "speakers": [
+                    {
+                        "nom": "Bruno Bonu",
+                        "affiliation": "LHUMAIN - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sDesingIntelCo",
+                "ordre": 5,
+                "duree": 20
+            },
+            {
+                "id": 165,
+                "titre": "Une méthode de design de l’intelligence collective",
+                "speakers": [
+                    {
+                        "nom": "Eric Lacombe",
+                        "affiliation": "MICA - Université de Perpignan, France"
+                    }
+                ],
+                "session": "sDesingIntelCo",
+                "ordre": 6,
+                "duree": 20
+            },
+            {
+                "titre": "Table ronde",
+                "abstract": "Questions aux orateurs, remarques du public",
+                "session": "sScienceMetho",
+                "ordre": 7,
+                "duree": 30
+            },
+            {
+                "id": 1604,
+                "titre": "« Cueillir entre » discrimination abductive, esthétique et intelligence",
+                "speakers": [
+                    {
+                        "nom": "Julien Péquignot",
+                        "affiliation": "LERASS - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sScienceMetho",
+                "ordre": 1,
+                "duree": 20
+            },
+            {
+                "id": 1604123,
+                "titre": "De la mémoire collective à la mémoire automatisée : reconfigurations discursives et enjeux du design",
+                "speakers": [
+                    {
+                        "nom": "François Perea",
+                        "affiliation": "LHUMAIN - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sScienceMetho",
+                "ordre": 2,
+                "duree": 20
+            },
+            {
+                "id": 16041,
+                "titre": "L'intelligence artificielle et la temporalité de la recherche doctorale : Entre processus de réflexion et immédiateté algorithmique",
+                "speakers": [
+                    {
+                        "nom": "Claire NOY",
+                        "affiliation": "LERASS, Université de Montpellier Paul-Valéry, France"
+                    },
+                    {
+                        "nom": "Laurent Collet",
+                        "affiliation": "LERASS, Université de Montpellier Paul-Valéry, France"
+                    },
+                    {
+                        "nom": "André Tricot",
+                        "affiliation": "EPSYLON, Université de Montpellier Paul-Valéry, France"
+                    }],
+                "session": "sScienceMetho",
+                "ordre": 3,
+                "duree": 20
+            },
+
+            {
+                "id": 1604110,
+                "titre": "Quel design de l'intelligence pour structurer un esprit scientifique ? Approche épistémologique et limites de la pensée humaine",
+                "speakers": [
+                    {
+                        "nom": "Jérémi Sauvage",
+                        "affiliation": "LHUMAIN - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sScienceMetho",
+                "ordre": 4,
+                "duree": 20
+            },
+            {
+                "titre": "Table ronde",
+                "abstract": "Questions aux orateurs, remarques du public",
+                "session": "sDesingIntelArti",
+                "ordre": 7,
+                "duree": 30
+            },
+            {
+                "id": 161204,
+                "titre": "Management responsable et intelligences multiples : Quels apports du design science ?",
+                "speakers": [
+                    {
+                        "nom": "Isabelle CHOQUET",
+                        "affiliation": "ICHEC Brussels Management School, Belgique"
+                    }
+                ],
+                "session": "sDesingIntelCo",
+                "ordre": 2,
+                "duree": 20
+            },
+            {
+                "id": 514,
+                "titre": "Du génératif à l’agentique dans un contexte d’accélération : effets sur les métiers de la communication",
+                "speakers": [
+                    {
+                        "nom": "Sami BEN AMOR",
+                        "affiliation": "Université de Toulon, France"
+                    },
+                    {
+                        "nom": "Michel DURAMPART",
+                        "affiliation": "Université de Toulon, France"
+                    }
+                ],
+                "session": "sDesingIntelArti",
+                "ordre": 5,
+                "duree": 20
+            },
+            {
+                "id": 1620514,
+                "titre": "Éthique située pour le co-design d’algorithmes",
+                "speakers": [
+                    {
+                        "nom": "Nicolas Duque-Buitrago",
+                        "affiliation": "LHUMAIN - Université de Montpellier Paul-Valéry, France"
+                    },
+                    {
+                        "nom": "Jose Oviedo Jose Fabian",
+                        "affiliation": "LHUMAIN - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sDesingIntelArti",
+                "ordre": 5,
+                "duree": 20
+            },
+            {
+                "id": 16227,
+                "titre": "Design de l’intelligence artisanale : entre transmission du savoir-faire et innovation produit en Tunisie",
+                "speakers": [
+                    {
+                        "nom": "Mariem Ben Fraj",
+                        "affiliation": "Ecole Supérieure des Sciences et Technologies du Design, Manouba, Tunisie)"
+                    }
+                ],
+                "session": "sCreInno",
+                "ordre": 7,
+                "duree": 20
+            },
+            {
+                "id": 2228,
+                "titre": "Vers une approche sensible des objets de design à travers les technologies immersives",
+                "speakers": [
+                    {
+                        "nom": "Mario Alberto Arias Valencia",
+                        "affiliation": "LARA-SEPPIA EA 4154 - Université de Toulouse jean-Jaurès, France"
+                    }
+                ],
+                "session": "sCreInno",
+                "ordre": 8,
+                "duree": 20
+            },
+            {
+                "speakers": [
+                    {
+                        "nom": "Lise VERLAET",
+                        "role": "---",
+                        "affiliation": "UR LHUMAIN, Université de Montpellier Paul-Valéry, France"
+                    },
+                    {
+                        "nom": "Franck RENUCCI",
+                        "role": "---",
+                        "affiliation": "IMSIC, Université de Toulon, France"
+                    },
+                    {
+                        "nom": "Khaldoun ZREIK",
+                        "role": "---",
+                        "affiliation": "Paragraphe, Université de Paris 8, France"
+                    }
+                ],
+                "titre": "Allocution de clôture du colloque",
+                "session": "sCloture",
+                "ordre": 6,
+                "duree": 30
+            },
+            {
+                "titre": "",
+                "session": "sRepas2",
+                "ordre": 7,
+                "duree": 90
+            },
+            {
+                "titre": "A définir...",
+                "session": "sExtra",
+                "ordre": 1,
+                "duree": 300
+            }
+        ]
+    }
+}
