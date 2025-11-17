@@ -263,6 +263,19 @@
                 "duree": 20
             },
             {
+                "titre": "Intégration de morphogenèse par dérive computationnelle itérative dans les workflows de design computationnel",
+                "speakers": [
+                    {
+                        "nom": "Stanislav Kurakin",
+                        "affiliation": "Paragraphe, Université de Paris 8, France"
+                    }
+                ],
+                "proposition": "",
+                "session": "sCreInno",
+                "ordre": 7,
+                "duree": 20
+            },
+            {
                 "titre": "Table ronde",
                 "abstract": "Questions aux orateurs, remarques du public",
                 "session": "sCreInno",
