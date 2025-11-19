@@ -339,6 +339,19 @@
                 "duree": 30
             },
             {
+                "id": 16,
+                "titre": "Quels processus de modélisation, de réalisation et d'usage pour rendre compte des résultats de recherche en SHS ? L'exemple du « diamant langagier » comme design intelligent",
+                "speakers": [
+                    {
+                        "nom": "Nathalie Auger",
+                        "affiliation": "LERASS - Université de Montpellier Paul-Valéry, France"
+                    }
+                ],
+                "session": "sScienceMetho",
+                "ordre": 1,
+                "duree": 20
+            },
+            {
                 "id": 1604,
                 "titre": "« Cueillir entre » discrimination abductive, esthétique et intelligence",
                 "speakers": [
@@ -348,7 +361,7 @@
                     }
                 ],
                 "session": "sScienceMetho",
-                "ordre": 1,
+                "ordre": 2,
                 "duree": 20
             },
             {
@@ -361,7 +374,7 @@
                     }
                 ],
                 "session": "sScienceMetho",
-                "ordre": 2,
+                "ordre": 3,
                 "duree": 20
             },
             {
@@ -381,7 +394,7 @@
                         "affiliation": "EPSYLON, Université de Montpellier Paul-Valéry, France"
                     }],
                 "session": "sScienceMetho",
-                "ordre": 3,
+                "ordre": 4,
                 "duree": 20
             },
 
@@ -395,7 +408,7 @@
                     }
                 ],
                 "session": "sScienceMetho",
-                "ordre": 4,
+                "ordre": 5,
                 "duree": 20
             },
             {
